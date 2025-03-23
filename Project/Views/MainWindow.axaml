@@ -14,7 +14,18 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+    <DockPanel>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <!-- Menu na górze -->
+        <Menu DockPanel.Dock="Top">
+           
+                <MenuItem Header="Witaj użytkowniku" Click="WitajUzytkownikuMenuItem_Click"/>
+                <MenuItem Header="Saldo" Click="SaldoMenuItem_Click"/>
 
+        </Menu>
+
+        <!-- ContentControl umożliwia zmianę zawartości na podstawie kliknięcia w menu -->
+        <ContentControl Name="ContentArea" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+    </DockPanel>
 </Window>
