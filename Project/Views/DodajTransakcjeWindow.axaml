@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Project.Views.DodajTransakcjeWindow"
+        Width="400" Height="300"
+        Title="Dodaj Transakcję"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+        <TextBlock Text="Dodaj Nową Transakcję" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+        
+        <!-- Pole na kwotę -->
+        <StackPanel Grid.Row="1" Spacing="10">
+            <TextBlock Text="Kwota:"/>
+            <TextBox x:Name="KwotaTextBox"/> <!-- ✅ Dodane x:Name -->
+        </StackPanel>
+
+        <!-- Przyciski akcji -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+            <Button Content="Anuluj" Click="Anuluj_Click"/>
+            <Button Content="Dodaj" Click="Dodaj_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
