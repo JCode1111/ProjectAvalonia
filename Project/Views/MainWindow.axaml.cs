@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Project.Views;
 
 namespace Project.Views
 {
@@ -8,30 +8,14 @@ namespace Project.Views
     {
         public MainWindow()
         {
-            InitializeComponent();  // Inicjalizuje kontrolki z XAML
-            this.WindowState = WindowState.Maximized;  // Ustawia okno na pełny ekran
+            InitializeComponent();
+            this.WindowState = WindowState.Maximized;
         }
 
-        // Obsługuje kliknięcie w "Witaj użytkowniku"
-        private void WitajUzytkownikuMenuItem_Click(object sender, RoutedEventArgs e)
+        private void DodajTransakcje_Click(object sender, RoutedEventArgs e)
         {
-            ContentArea.Content = new TextBlock
-            {
-                Text = "Witaj użytkowniku!",
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
-            };
-        }
-
-        // Obsługuje kliknięcie w "Saldo"
-        private void SaldoMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            ContentArea.Content = new TextBlock
-            {
-                Text = "Twoje saldo wynosi: 5000 PLN",
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
-            };
+            var popup = new DodajTransakcjeWindow();
+            popup.ShowDialog(this); // Wyświetlenie jako modalnego okna
         }
     }
 }

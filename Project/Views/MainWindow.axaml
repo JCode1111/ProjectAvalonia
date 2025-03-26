@@ -7,25 +7,30 @@
         x:Class="Project.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Project">
+        Title="Project"
+        WindowState="Maximized">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-    <DockPanel>
 
-        <!-- Menu na górze -->
-        <Menu DockPanel.Dock="Top">
-           
-                <MenuItem Header="Witaj użytkowniku" Click="WitajUzytkownikuMenuItem_Click"/>
-                <MenuItem Header="Saldo" Click="SaldoMenuItem_Click"/>
-
+    <Grid RowDefinitions="Auto, *">
+        
+        <!-- Pasek menu -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="Witaj użytkowniku"/>
         </Menu>
 
-        <!-- ContentControl umożliwia zmianę zawartości na podstawie kliknięcia w menu -->
-        <ContentControl Name="ContentArea" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <!-- Sekcja główna -->
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Padding="20" Margin="10">
+        <Grid  HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+            <TextBlock Text="Twoje saldo wynosi: 5000 PLN" FontSize="20" HorizontalAlignment="Center"/>
+            <Button Content="Dodaj Transakcję" Click="DodajTransakcje_Click"/>
+        </StackPanel>
+    </Grid>
+</Border>
 
-    </DockPanel>
+        
+    </Grid>
 </Window>
