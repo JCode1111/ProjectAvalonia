@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Project.Views.LogowanieWindow"
+        Title="Logowanie"
+        Width="300" Height="300"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+
+    <StackPanel Margin="20" Spacing="10">
+        <TextBlock Text="Nazwa użytkownika:"/>
+        <TextBox x:Name="NazwaTextBox"/>
+        
+        <TextBlock Text="Hasło:"/>
+        <TextBox x:Name="HasloTextBox" PasswordChar="*"/>
+
+        <TextBlock x:Name="BladTextBlock" Foreground="Red" FontSize="12"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+            <Button Content="Anuluj" Click="Anuluj_Click"/>
+            <Button Content="Zaloguj" Click="Zaloguj_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
