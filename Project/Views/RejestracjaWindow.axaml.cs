@@ -56,14 +56,14 @@ namespace Project.Views
             }
 
             // Sprawdzanie, czy użytkownik o danej nazwie już istnieje
-            if (users.Exists(u => u.Nazwa == nazwa))
+            if (users.Exists(u => u.Login == nazwa))
             {
                 BladTextBlock.Text = "Taki użytkownik już istnieje.";
                 return;
             }
 
             // Dodanie nowego użytkownika do listy
-            users.Add(new Uzytkownik { Nazwa = nazwa!, Haslo = haslo });
+            users.Add(new Uzytkownik { Login = nazwa!, Haslo = haslo });
             Console.WriteLine("Nowy użytkownik dodany.");
 
             // Zapisanie użytkowników do pliku
@@ -82,7 +82,7 @@ namespace Project.Views
             }
 
             // Przypisanie nazwy użytkownika do zmiennej statycznej
-            MainWindow.UzytkownikZalogowany = nazwa!;
+            MainWindow.UzytkownikZalogowany = new Uzytkownik { Login = nazwa!, Haslo = haslo };
             this.Close();
         }
     }

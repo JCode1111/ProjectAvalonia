@@ -9,7 +9,7 @@
     <Grid RowDefinitions="Auto, *, Auto">
         <TextBlock Text="Dodaj Nową Transakcję" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
-        <StackPanel Grid.Row="1" Spacing="10">
+        <StackPanel Grid.Row="1" Spacing="10" Margin="20">
             <!-- Kwota -->
             <TextBlock Text="Kwota:"/>
             <TextBox x:Name="KwotaTextBox"/>
@@ -29,15 +29,15 @@
             <TextBox x:Name="OpisTextBox" AcceptsReturn="True" Height="60"/>
 
             <!-- Załącznik -->
-            <TextBlock Text="Załącznik (paragon):"/>
+            <TextBlock x:Name="ZalacznikTextBlock" Text="Brak pliku" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <Button Content="Wybierz plik" Click="WybierzPlik_Click"/>
-                <TextBlock x:Name="ZalacznikTextBlock" Text="Brak pliku" VerticalAlignment="Center"/>
+                <TextBlock x:Name="ZalacznikTextBlock1" Text="Brak pliku" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
 
         <!-- Przyciski akcji -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,10,0,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,0,20,40">
             <Button Content="Anuluj" Click="Anuluj_Click"/>
             <Button Content="Dodaj" Click="Dodaj_Click"/>
         </StackPanel>

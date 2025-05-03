@@ -66,3 +66,5 @@ C:\Users\kruzl\Desktop\Avalonia\ProjectAvalonia\Project\bin\Debug\net9.0\runtime
 C:\Users\kruzl\Desktop\Avalonia\ProjectAvalonia\Project\obj\Debug\net9.0\Project.csproj.Up2Date
 C:\Users\kruzl\Desktop\Avalonia\ProjectAvalonia\Project\obj\Debug\net9.0\Project.genruntimeconfig.cache
 C:\Users\kruzl\Desktop\Avalonia\ProjectAvalonia\Project\obj\Debug\net9.0\ref\Project.dll
+C:\Users\kruzl\Desktop\Avalonia\ProjectAvalonia\Project\bin\Debug\net9.0\DialogHost.Avalonia.dll
+C:\Users\kruzl\Desktop\Avalonia\ProjectAvalonia\Project\bin\Debug\net9.0\MsBox.Avalonia.dll

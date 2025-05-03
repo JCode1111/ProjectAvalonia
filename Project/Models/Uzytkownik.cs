@@ -1,8 +1,6 @@
-namespace Project.Models
+public class Uzytkownik
 {
-    public class Uzytkownik
-    {
-        public string Nazwa { get; set; } = "";
-        public string Haslo { get; set; } = "";
-    }
+    public string Login { get; set; }
+    public string Haslo { get; set; }
+    public decimal Saldo { get; set; }
 }

@@ -1,13 +1,16 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
-using Avalonia.Platform.Storage;
+using System.IO;
 
 namespace Project.Views
 {
     public partial class DodajTransakcjeWindow : Window
     {
-        private string? sciezkaZalacznika;
+        public decimal Kwota { get; private set; }
+        public string Kategoria { get; private set; } = string.Empty;
+        public string Opis { get; private set; } = string.Empty;
+        public string? ZalacznikSciezka { get; private set; }
 
         public DodajTransakcjeWindow()
         {
@@ -15,37 +18,40 @@ namespace Project.Views
         }
 
         private async void WybierzPlik_Click(object? sender, RoutedEventArgs e)
-{
-    var files = await this.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
-    {
-        Title = "Wybierz plik",
-        AllowMultiple = false
-    });
-
-    if (files.Count > 0)
-    {
-        var file = files[0];
-        sciezkaZalacznika = file.Name;
-        ZalacznikTextBlock.Text = sciezkaZalacznika;
-    }
-}
-
-
-        private void Anuluj_Click(object? sender, RoutedEventArgs e)
         {
-            this.Close();
+            var dialog = new OpenFileDialog
+            {
+                AllowMultiple = false
+            };
+
+            var result = await dialog.ShowAsync(this);
+            if (result != null && result.Length > 0)
+            {
+                ZalacznikSciezka = result[0];
+                ZalacznikTextBlock.Text = Path.GetFileName(ZalacznikSciezka);
+            }
         }
 
         private void Dodaj_Click(object? sender, RoutedEventArgs e)
         {
-            string kwota = KwotaTextBox.Text ?? "";
-            string opis = OpisTextBox.Text ?? "";
-            string kategoria = (KategoriaComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Nieokreślona";
+            if (decimal.TryParse(KwotaTextBox.Text, out var kwota))
+            {
+                Kwota = -kwota;
+                Kategoria = (KategoriaComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Inne";
+                Opis = OpisTextBox.Text;
 
-            // Możesz tu dodać logikę np. zapisania danych do bazy lub pliku
-            Console.WriteLine($"Dodano transakcję: {kwota} PLN, {kategoria}, {opis}, Załącznik: {sciezkaZalacznika}");
+                this.Close(true); // success
+            }
+            else
+            {
+               Console.WriteLine("Uzupełnij wszystkie pola!"); // tylko do debugowania
+                this.Close(false); // lub nie zamykaj w ogóle
+            }
+        }
 
-            this.Close();
+        private void Anuluj_Click(object? sender, RoutedEventArgs e)
+        {
+            this.Close(false); // cancelled
         }
     }
 }

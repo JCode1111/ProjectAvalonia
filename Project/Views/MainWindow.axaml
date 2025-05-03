@@ -38,10 +38,23 @@
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 
-      <!-- Nagłówek -->
-      <TextBlock Grid.ColumnSpan="3" Text="" x:Name="PowitanieTextBlock" 
-                 FontSize="20" FontWeight="Bold" 
-                 HorizontalAlignment="Center" Margin="0,10"/>
+
+
+    <!-- Powitanie -->
+<TextBlock x:Name="PowitanieTextBlock" Grid.ColumnSpan="3" Text="" FontSize="20" FontWeight="Bold" 
+          HorizontalAlignment="Center" Margin="0,20,0,80" />
+
+<!-- Saldo -->
+<TextBlock x:Name="SaldoText" Grid.ColumnSpan="3" Text="Saldo: 0 PLN" FontSize="16" 
+          HorizontalAlignment="Center" Margin="0,30,0,15" Padding="15"/>
+
+<!-- Przycisk: dodaj transakcję i wypłatę -->
+<StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" 
+            Margin="0,60,0,0" Spacing="20">
+    <Button Content="Dodaj transakcję" Click="DodajTransakcje_Click"/>
+    <!-- <Button Content="Dodaj wypłatę" Click="DodajWyplate_Click"/> -->
+</StackPanel>
+
 
       <!-- Lewy panel -->
       <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="10">
@@ -55,7 +68,13 @@
       <Border Grid.Row="1" Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="10">
         <StackPanel Spacing="10">
           <TextBlock Text="Historia transakcji" FontWeight="Bold"/>
-          <ListBox x:Name="HistoriaListBox"/>
+          <!-- Lista transakcji -->
+          <ListBox x:Name="TransakcjeListBox"
+              Grid.Row="1"
+              Margin="10"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"/>
+
         </StackPanel>
       </Border>
 

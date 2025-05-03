@@ -1,0 +1,26 @@
+[
+  {
+    "Kwota": 100,
+    "Kategoria": "Transport",
+    "Opis": "bilet autobusowy",
+    "ZalacznikSciezka": "C:\\Users\\kruzl\\Desktop\\1306182.jpeg",
+    "Data": "2025-05-03T16:31:32.1392066+02:00",
+    "Uzytkownik": "admin"
+  },
+  {
+    "Kwota": 100,
+    "Kategoria": "Jedzenie",
+    "Opis": "burger",
+    "ZalacznikSciezka": "C:\\Users\\kruzl\\Desktop\\1306182.jpeg",
+    "Data": "2025-05-03T17:31:53.1859317+02:00",
+    "Uzytkownik": "admin"
+  },
+  {
+    "Kwota": 100,
+    "Kategoria": "Jedzenie",
+    "Opis": "burger",
+    "ZalacznikSciezka": null,
+    "Data": "2025-05-03T17:33:00.220474+02:00",
+    "Uzytkownik": "admin"
+  }
+]

@@ -1,22 +1,17 @@
 [
   {
-    "Nazwa": "olek",
-    "Haslo": "4321"
+    "Login": "olek",
+    "Haslo": "4321",
+    "Saldo": 0
   },
   {
-    "Nazwa": "admin",
-    "Haslo": "admin"
+    "Login": "admin",
+    "Haslo": "admin",
+    "Saldo": 150.0
   },
   {
-    "Nazwa": "test",
-    "Haslo": "test"
-  },
-  {
-    "Nazwa": "jakub",
-    "Haslo": "jakub"
-  },
-  {
-    "Nazwa": "jakubb",
-    "Haslo": "54321"
+    "Login": "pepe",
+    "Haslo": "admin",
+    "Saldo": 0
   }
 ]
