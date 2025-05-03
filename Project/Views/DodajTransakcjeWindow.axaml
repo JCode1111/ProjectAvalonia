@@ -1,22 +1,43 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="Project.Views.DodajTransakcjeWindow"
-        Width="400" Height="300"
+        Width="400" Height="400"
         Title="Dodaj Transakcję"
         WindowStartupLocation="CenterOwner"
         CanResize="False">
 
     <Grid RowDefinitions="Auto, *, Auto">
         <TextBlock Text="Dodaj Nową Transakcję" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-        
-        <!-- Pole na kwotę -->
+
         <StackPanel Grid.Row="1" Spacing="10">
+            <!-- Kwota -->
             <TextBlock Text="Kwota:"/>
-            <TextBox x:Name="KwotaTextBox"/> <!-- ✅ Dodane x:Name -->
+            <TextBox x:Name="KwotaTextBox"/>
+
+            <!-- Kategoria -->
+            <TextBlock Text="Kategoria:"/>
+            <ComboBox x:Name="KategoriaComboBox">
+                <ComboBoxItem Content="Transport"/>
+                <ComboBoxItem Content="Jedzenie"/>
+                <ComboBoxItem Content="Rachunki"/>
+                <ComboBoxItem Content="Rozrywka"/>
+                <ComboBoxItem Content="Inne"/>
+            </ComboBox>
+
+            <!-- Opis -->
+            <TextBlock Text="Opis:"/>
+            <TextBox x:Name="OpisTextBox" AcceptsReturn="True" Height="60"/>
+
+            <!-- Załącznik -->
+            <TextBlock Text="Załącznik (paragon):"/>
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Button Content="Wybierz plik" Click="WybierzPlik_Click"/>
+                <TextBlock x:Name="ZalacznikTextBlock" Text="Brak pliku" VerticalAlignment="Center"/>
+            </StackPanel>
         </StackPanel>
 
         <!-- Przyciski akcji -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,10,0,0">
             <Button Content="Anuluj" Click="Anuluj_Click"/>
             <Button Content="Dodaj" Click="Dodaj_Click"/>
         </StackPanel>

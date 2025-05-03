@@ -24,7 +24,8 @@ namespace Project.Views
         private void Zaloguj_Click(object? sender, RoutedEventArgs e)
         {
             // Pobierz pełną ścieżkę do pliku users.json w folderze Data
-           string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data", "users.json");
+          string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data", "users.json");
+
 
             if (!File.Exists(path))
             {
@@ -48,9 +49,7 @@ namespace Project.Views
             {
                 // Zalogowano pomyślnie - ustawienie zalogowanego użytkownika w MainWindow
                 MainWindow.UzytkownikZalogowany = nazwa!;
-                _mainWindow.AktualizujPowitanie(); // Zaktualizuj powitanie w MainWindow
-
-                // Zamknięcie okna logowania
+            //    _mainWindow.AktualizujPowitanie();
                 this.Close();
             }
             else

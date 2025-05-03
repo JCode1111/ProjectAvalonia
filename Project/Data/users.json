@@ -10,5 +10,13 @@
   {
     "Nazwa": "test",
     "Haslo": "test"
+  },
+  {
+    "Nazwa": "jakub",
+    "Haslo": "jakub"
+  },
+  {
+    "Nazwa": "jakubb",
+    "Haslo": "54321"
   }
 ]

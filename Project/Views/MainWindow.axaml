@@ -1,40 +1,72 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:Project.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Project.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
         Title="Project"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Width="800" Height="600">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <DockPanel>
 
-    <Grid RowDefinitions="Auto, *">
-        
-        <!-- Pasek menu -->
-        <Menu Grid.Row="0">
-            <MenuItem Header="Użytkownik">
-                <MenuItem Header="Logowanie" Click="Logowanie_Click"/>
-                <MenuItem Header="Załóż konto" Click="Rejestracja_Click"/>
-            </MenuItem>
-        </Menu>
+    <!-- MENU -->
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="Użytkownik" x:Name="MenuUzytkownik">
+        <MenuItem x:Name="MenuLogowanie" Header="Logowanie" Click="Logowanie_Click"/>
+        <MenuItem x:Name="MenuRejestracja" Header="Załóż konto" Click="Rejestracja_Click"/>
+        <MenuItem x:Name="MenuWyloguj" Header="Wyloguj" Click="Wyloguj_Click" IsVisible="False"/>
+      </MenuItem>
+    </Menu>
 
-        <!-- Sekcja główna -->
-        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Padding="20" Margin="10">
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Spacing="20" Margin="0,20,0,0">
-                    <!-- Dodajemy TextBlock dla powitania -->
-                    <TextBlock x:Name="PowitanieTextBlock" FontSize="20" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Twoje saldo wynosi: 5000 PLN" FontSize="20" HorizontalAlignment="Center"/>
-                    <Button Content="Dodaj Transakcję" Click="DodajTransakcje_Click"/>
-                </StackPanel>
-            </Grid>
-        </Border>
-        
+    <!-- PANELE -->
+    <Grid x:Name="PanelNieZalogowany" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="True">
+      <StackPanel Spacing="20" HorizontalAlignment="Center">
+        <TextBlock Text="Nie jesteś zalogowany." FontSize="24" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+          <Button Content="Logowanie" Click="Logowanie_Click"/>
+          <Button Content="Rejestracja" Click="Rejestracja_Click"/>
+        </StackPanel>
+      </StackPanel>
     </Grid>
+
+    <Grid x:Name="PanelZalogowany" DockPanel.Dock="Top" IsVisible="False">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition Width="3*"/>
+        <ColumnDefinition Width="2*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <!-- Nagłówek -->
+      <TextBlock Grid.ColumnSpan="3" Text="" x:Name="PowitanieTextBlock" 
+                 FontSize="20" FontWeight="Bold" 
+                 HorizontalAlignment="Center" Margin="0,10"/>
+
+      <!-- Lewy panel -->
+      <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="10">
+        <StackPanel Spacing="10">
+          <TextBlock Text="Panel lewy" FontWeight="Bold"/>
+          <!-- np. filtr -->
+        </StackPanel>
+      </Border>
+
+      <!-- Środkowy panel (historia transakcji) -->
+      <Border Grid.Row="1" Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="10">
+        <StackPanel Spacing="10">
+          <TextBlock Text="Historia transakcji" FontWeight="Bold"/>
+          <ListBox x:Name="HistoriaListBox"/>
+        </StackPanel>
+      </Border>
+
+      <!-- Prawy panel -->
+      <Border Grid.Row="1" Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="10">
+        <StackPanel Spacing="10">
+          <TextBlock Text="Panel prawy" FontWeight="Bold"/>
+          <!-- np. saldo -->
+        </StackPanel>
+      </Border>
+    </Grid>
+
+  </DockPanel>
 </Window>

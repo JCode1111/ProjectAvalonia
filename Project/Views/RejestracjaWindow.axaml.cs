@@ -30,7 +30,7 @@ namespace Project.Views
                 return;
             }
 
-             string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data", "users.json");
+              string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data", "users.json");
 
             List<Uzytkownik> users;
             if (File.Exists(path))
