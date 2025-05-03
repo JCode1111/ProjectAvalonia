@@ -3,11 +3,18 @@ Aplikacja desktopowa umożliwiająca użytkownikowi śledzenie przychodów i wyd
 
 🔹 Rozbudowane funkcje aplikacji:
 
-1. Wyświetlania salda
-2. Dodawanie, edycja i usuwanie transakcji
-3. Kategorie wydatków (np. jedzenie, transport, rachunki)
-4. Możliwość oznaczania transakcji jako cykliczne (np. abonamenty, czynsz)
-5. Możliwość dodawania opisu i załączników (np. zdjęcia paragonów)
+1. Logowanie do Systemu z pliku users.json
+2. Rejestracja do Systemu (zapisywane w pliku users.json)
+3. Wyświetlania salda po zalogowaniu
+4. Dodawanie transakcji użytkowników
+5. Wyświetlanie transakcji danego uzytkownika
+6. Kategorie transakcji (np. jedzenie, transport, rachunki)
+7. Możliwość dodawania opisu i załączników (np. zdjęcia paragonów)
+8. aktualizacja salda usera na podstawie transakcji z pliku transakcje.json
+
+9. Dodanie mozliwości dodania wyplaty aby sledzic wydatki (X)
+10. Dodawanie, edycja i usuwanie transakcji (X)
+11. Możliwość oznaczania transakcji jako cykliczne (np. abonamenty, czynsz)(X)
 
 2️⃣ Analiza finansowa
 ✅ Wyświetlanie miesięcznego i rocznego podsumowania
