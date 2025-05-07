@@ -40,27 +40,58 @@
 
 
 
-    <!-- Powitanie -->
-<TextBlock x:Name="PowitanieTextBlock" Grid.ColumnSpan="3" Text="" FontSize="20" FontWeight="Bold" 
-          HorizontalAlignment="Center" Margin="0,20,0,80" />
+          <!-- Powitanie -->
+      <TextBlock x:Name="PowitanieTextBlock" Grid.ColumnSpan="3" Text="" FontSize="20" FontWeight="Bold" 
+                HorizontalAlignment="Center" Margin="0,20,0,80" />
 
-<!-- Saldo -->
-<TextBlock x:Name="SaldoText" Grid.ColumnSpan="3" Text="Saldo: 0 PLN" FontSize="16" 
-          HorizontalAlignment="Center" Margin="0,30,0,15" Padding="15"/>
+      <!-- Saldo -->
+      <TextBlock x:Name="SaldoText" Grid.ColumnSpan="3" Text="Saldo: 0 PLN" FontSize="16" 
+                HorizontalAlignment="Center" Margin="0,30,0,15" Padding="15"/>
 
-<!-- Przycisk: dodaj transakcję i wypłatę -->
-<StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" 
-            Margin="0,60,0,0" Spacing="20">
-    <Button Content="Dodaj transakcję" Click="DodajTransakcje_Click"/>
-    <!-- <Button Content="Dodaj wypłatę" Click="DodajWyplate_Click"/> -->
-</StackPanel>
+      <!-- Sekcja z przyciskami i komunikatem -->
+      <StackPanel Grid.ColumnSpan="3" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,80,0,0" Spacing="10">
+        
+        <!-- Przycisk: dodaj transakcję i wypłatę -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+          <Button Content="Dodaj transakcję" Click="DodajTransakcje_Click"/>
+          <Button Content="Dodaj Wypłatę" Click="DodajWyplate_Click"/>
+        </StackPanel>
 
+        <!-- Komunikat o limicie -->
+        <TextBlock x:Name="LimitInfoTextBlock"
+                  FontWeight="Bold"
+                  Foreground="Red"
+                  FontSize="16"
+                  TextAlignment="Center"
+                  HorizontalAlignment="Center"
+                  TextWrapping="Wrap"
+                  MaxWidth="400"/>
+      </StackPanel>
 
       <!-- Lewy panel -->
       <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="10">
         <StackPanel Spacing="10">
-          <TextBlock Text="Panel lewy" FontWeight="Bold"/>
-          <!-- np. filtr -->
+          
+          <TextBlock Text="Kategorie" FontWeight="Bold" Margin="0,0,0,5"/>
+          <ListBox x:Name="KategorieListBox" SelectionChanged="Kategorie_SelectionChanged" />
+
+          <TextBlock Text="Data od:" Margin="0,10,0,0"/>
+          <DatePicker x:Name="DataOdPicker" SelectedDateChanged="DataPicker_Changed" />
+
+          <TextBlock Text="Data do:" Margin="0,10,0,0"/>
+          <DatePicker x:Name="DataDoPicker" SelectedDateChanged="DataPicker_Changed" />
+
+          <TextBlock Text="Sortuj według:" Margin="5,10,5,0"/>
+          <ComboBox Name="SortowanieComboBox" SelectionChanged="SortowanieComboBox_SelectionChanged" Margin="5">
+              <ComboBoxItem Content="Data rosnąco" />
+              <ComboBoxItem Content="Data malejąco" />
+              <ComboBoxItem Content="Kwota rosnąco" />
+              <ComboBoxItem Content="Kwota malejąco" />
+          </ComboBox>
+
+
+          <Button Content="Wyczyść filtry" Click="WyczyscFiltry_Click" Margin="5"/>
+
         </StackPanel>
       </Border>
 
@@ -81,8 +112,26 @@
       <!-- Prawy panel -->
       <Border Grid.Row="1" Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="10">
         <StackPanel Spacing="10">
-          <TextBlock Text="Panel prawy" FontWeight="Bold"/>
-          <!-- np. saldo -->
+          <TextBlock Text="Limity budżetowe" FontWeight="Bold"/>
+
+          <StackPanel Margin="20" Spacing="10">
+            <TextBlock Text="Ustaw limity budżetowe" FontSize="18" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Kategoria:"/>
+            <ComboBox x:Name="KategoriaComboBox">
+                <ComboBoxItem Content="Jedzenie"/>
+                <ComboBoxItem Content="Rozrywka"/>
+                <ComboBoxItem Content="Transport"/>
+                <ComboBoxItem Content="Inne"/>
+            </ComboBox>
+
+            <TextBlock Text="Limit miesięczny (zł):"/>
+            <TextBox x:Name="LimitTextBox"/>
+
+            <Button Content="Zapisz limit" Click="ZapiszLimit_Click" HorizontalAlignment="Right" Margin="0,10,0,0"/>
+            
+        </StackPanel>
+
         </StackPanel>
       </Border>
     </Grid>

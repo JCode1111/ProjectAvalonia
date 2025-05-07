@@ -2,16 +2,34 @@
   {
     "Login": "olek",
     "Haslo": "4321",
-    "Saldo": 0
+    "Saldo": 0,
+    "LimityBudzetowe": []
   },
   {
     "Login": "admin",
     "Haslo": "admin",
-    "Saldo": 150.0
+    "Saldo": 100.0,
+    "LimityBudzetowe": [
+      {
+        "Kategoria": "Jedzenie",
+        "Limit": 1000
+      },
+      {
+        "Kategoria": "Rozrywka",
+        "Limit": 1000
+      }
+    ]
   },
   {
     "Login": "pepe",
     "Haslo": "admin",
-    "Saldo": 0
+    "Saldo": 0,
+    "LimityBudzetowe": []
+  },
+  {
+    "Login": "test5",
+    "Haslo": "test5",
+    "Saldo": 2500,
+    "LimityBudzetowe": []
   }
 ]

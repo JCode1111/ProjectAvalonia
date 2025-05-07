@@ -11,10 +11,12 @@ Aplikacja desktopowa umożliwiająca użytkownikowi śledzenie przychodów i wyd
 6. Kategorie transakcji (np. jedzenie, transport, rachunki)
 7. Możliwość dodawania opisu i załączników (np. zdjęcia paragonów)
 8. aktualizacja salda usera na podstawie transakcji z pliku transakcje.json
-
-9. Dodanie mozliwości dodania wyplaty aby sledzic wydatki (X)
-10. Dodawanie, edycja i usuwanie transakcji (X)
-11. Możliwość oznaczania transakcji jako cykliczne (np. abonamenty, czynsz)(X)
+9. Dodanie mozliwości dodania wyplaty
+10. Dodanie w panelu lewym mozliwosc filtrowania historii transakcji
+11. Dodanie możliwości ustawiania limitów budżetowych w panelu prawym + wyświetlanie
+    komunikatu o przekroczeniu limitu.
+12. Dodawanie, edycja i usuwanie transakcji (X)
+13. Możliwość oznaczania transakcji jako cykliczne (np. abonamenty, czynsz)(X)
 
 2️⃣ Analiza finansowa
 ✅ Wyświetlanie miesięcznego i rocznego podsumowania

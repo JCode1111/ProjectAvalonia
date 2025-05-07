@@ -51,5 +51,41 @@ namespace Project.Services
             var noweSaldo = transakcje.Sum(t => t.Kwota);
             AktualizujSaldo(login, noweSaldo);
         }
+
+        public static Uzytkownik? Wczytaj(string login)
+        {
+            if (!File.Exists(Sciezka)) return null;
+
+            var json = File.ReadAllText(Sciezka);
+            var lista = JsonSerializer.Deserialize<List<Uzytkownik>>(json);
+            return lista?.FirstOrDefault(u => u.Login == login);
+        }
+
+
+        public static void Zapisz(Uzytkownik user)
+        {
+            if (!File.Exists(Sciezka))
+                return;
+
+            var json = File.ReadAllText(Sciezka);
+            var lista = JsonSerializer.Deserialize<List<Uzytkownik>>(json) ?? new List<Uzytkownik>();
+
+            var index = lista.FindIndex(u => u.Login == user.Login);
+            if (index >= 0)
+            {
+                lista[index] = user;
+            }
+            else
+            {
+                lista.Add(user);
+            }
+
+            var nowyJson = JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(Sciezka, nowyJson);
+            Console.WriteLine("[UserService] Użytkownik zapisany:\n" + nowyJson);
+        }
+
+
+
     }
 }
