@@ -1,81 +1,89 @@
 [
   {
-    "Data": "2024-05-03T12:34:56",
-    "Kwota": 50.0,
-    "Kategoria": "Jedzenie",
-    "Opis": "Lunch",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Data": "2025-05-03T18:24:21.8091827+02:00",
-    "Kwota": 100,
-    "Kategoria": "Jedzenie",
-    "Opis": "burger",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Data": "2025-05-03T18:27:22.5407762+02:00",
-    "Kwota": 10,
-    "Kategoria": "Transport",
-    "Opis": "test",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Data": "2025-05-03T18:28:23.7008801+02:00",
-    "Kwota": -10,
-    "Kategoria": "Jedzenie",
-    "Opis": "test",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Data": "2025-05-07T19:52:04.9544506+02:00",
-    "Kwota": -25,
-    "Kategoria": "Rachunki",
-    "Opis": "pr\u0105d",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Data": "2025-05-07T20:23:20.0486775+02:00",
-    "Kwota": -25,
-    "Kategoria": "Jedzenie",
-    "Opis": "burger",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Data": "2025-05-07T21:14:24.8054116+02:00",
-    "Kwota": 1000,
-    "Kategoria": "Wyp\u0142ata",
-    "Opis": "Wyp\u0142ata za miesi\u0105c kwiecie\u0144",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Data": "2025-05-07T21:19:06.5451934+02:00",
-    "Kwota": -100,
-    "Kategoria": "Rozrywka",
-    "Opis": "bungee",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": "C:\\Users\\kruzl\\Desktop\\1306182.jpeg"
-  },
-  {
-    "Data": "2025-05-07T21:20:06.4462344+02:00",
-    "Kwota": 2500,
-    "Kategoria": "Wyp\u0142ata",
     "Opis": "wyp\u0142ata za miesi\u0105c",
+    "Kwota": 2500,
+    "Data": "2025-05-07T21:20:06.4462344+02:00",
+    "Kategoria": "Wyp\u0142ata",
     "Uzytkownik": "test5",
     "ZalacznikSciezka": null
   },
   {
-    "Data": "2025-05-07T22:09:42.7097653+02:00",
-    "Kwota": -900,
-    "Kategoria": "Jedzenie",
     "Opis": "test",
+    "Kwota": -200,
+    "Data": "2025-05-11T18:50:48.5096477+02:00",
+    "Kategoria": "Rozrywka",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": 3000,
+    "Data": "2025-05-11T18:51:07.6191456+02:00",
+    "Kategoria": "Wyp\u0142ata",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "jedzenie",
+    "Kwota": -100,
+    "Data": "2025-05-11T19:05:56.6981346+02:00",
+    "Kategoria": "Rozrywka",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -30,
+    "Data": "2025-05-11T19:45:41.4842723+02:00",
+    "Kategoria": "Jedzenie",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -50,
+    "Data": "2025-05-11T20:24:25.2173589+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": "C:\\Users\\kruzl\\Desktop\\1306182.jpeg"
+  },
+  {
+    "Opis": "test",
+    "Kwota": -75,
+    "Data": "2025-05-11T20:26:23.5629643+02:00",
+    "Kategoria": "Jedzenie",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "t",
+    "Kwota": -10,
+    "Data": "2025-05-11T20:29:02.6520072+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "t",
+    "Kwota": -5,
+    "Data": "2025-05-11T20:29:07.1313522+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -1000,
+    "Data": "2025-05-11T21:54:47.0957678+02:00",
+    "Kategoria": "Jedzenie",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -10,
+    "Data": "2025-05-11T22:49:18.2933045+02:00",
+    "Kategoria": "Transport",
     "Uzytkownik": "admin",
     "ZalacznikSciezka": null
   }

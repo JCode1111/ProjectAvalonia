@@ -21,20 +21,20 @@ build_property.EnableGeneratedComInterfaceComImportInterop =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/App.axaml]
+[c:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/DodajTransakcjeWindow.axaml]
+[c:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/DodajTransakcjeWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/DodajWyplateWindow.axaml]
+[c:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/DodajWyplateWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/LogowanieWindow.axaml]
+[c:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/LogowanieWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/MainWindow.axaml]
+[c:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/RejestracjaWindow.axaml]
+[c:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/RejestracjaWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

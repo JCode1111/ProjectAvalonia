@@ -8,7 +8,7 @@
   {
     "Login": "admin",
     "Haslo": "admin",
-    "Saldo": 100.0,
+    "Saldo": 1520,
     "LimityBudzetowe": [
       {
         "Kategoria": "Jedzenie",
@@ -16,7 +16,11 @@
       },
       {
         "Kategoria": "Rozrywka",
-        "Limit": 1000
+        "Limit": 1500
+      },
+      {
+        "Kategoria": "Transport",
+        "Limit": 1100
       }
     ]
   },
@@ -30,6 +34,12 @@
     "Login": "test5",
     "Haslo": "test5",
     "Saldo": 2500,
+    "LimityBudzetowe": []
+  },
+  {
+    "Login": "test",
+    "Haslo": "test4321",
+    "Saldo": 0,
     "LimityBudzetowe": []
   }
 ]

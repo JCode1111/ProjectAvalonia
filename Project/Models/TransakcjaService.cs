@@ -47,5 +47,50 @@ namespace Project.Services
                 return new List<Transakcja>();
             }
         }
+    
+        public static void Usun(Transakcja doUsuniecia)
+{
+    if (!File.Exists(Sciezka)) return;
+
+    var json = File.ReadAllText(Sciezka);
+    var lista = JsonSerializer.Deserialize<List<Transakcja>>(json) ?? new List<Transakcja>();
+
+    lista = lista
+        .Where(t => !(t.Opis == doUsuniecia.Opis &&
+                      t.Kwota == doUsuniecia.Kwota &&
+                      t.Data == doUsuniecia.Data &&
+                      t.Kategoria == doUsuniecia.Kategoria &&
+                      t.Uzytkownik == doUsuniecia.Uzytkownik &&
+                      t.ZalacznikSciezka == doUsuniecia.ZalacznikSciezka))
+        .ToList();
+
+    File.WriteAllText(Sciezka, JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true }));
+}
+
+        public static void Zamien(Transakcja stara, Transakcja nowa)
+{
+    if (!File.Exists(Sciezka)) return;
+
+    var json = File.ReadAllText(Sciezka);
+    var lista = JsonSerializer.Deserialize<List<Transakcja>>(json) ?? new List<Transakcja>();
+
+    var index = lista.FindIndex(t =>
+        t.Opis == stara.Opis &&
+        t.Kwota == stara.Kwota &&
+        t.Data == stara.Data &&
+        t.Kategoria == stara.Kategoria &&
+        t.Uzytkownik == stara.Uzytkownik &&
+        t.ZalacznikSciezka == stara.ZalacznikSciezka
+    );
+
+    if (index >= 0)
+    {
+        lista[index] = nowa;
+        File.WriteAllText(Sciezka, JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true }));
+    }
+}
+
+        
+    
     }
 }

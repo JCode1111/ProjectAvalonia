@@ -1,13 +1,15 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="Project.Views.DodajTransakcjeWindow"
+        x:DataType="local:DodajTransakcjeWindow"
+        xmlns:local="clr-namespace:Project.Views"
         Width="400" Height="400"
-        Title="Dodaj Transakcję"
+        Title="{Binding TytulOkna}"
         WindowStartupLocation="CenterOwner"
         CanResize="False">
 
     <Grid RowDefinitions="Auto, *, Auto">
-        <TextBlock Text="Dodaj Nową Transakcję" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+        <TextBlock Text="{Binding TytulOkna}" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
         <StackPanel Grid.Row="1" Spacing="10" Margin="20">
             <!-- Kwota -->
@@ -29,17 +31,17 @@
             <TextBox x:Name="OpisTextBox" AcceptsReturn="True" Height="60"/>
 
             <!-- Załącznik -->
-            <TextBlock x:Name="ZalacznikTextBlock" Text="Brak pliku" VerticalAlignment="Center"/>
+            <TextBlock x:Name="ZalacznikTextBlock1" Text="Brak pliku" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <Button Content="Wybierz plik" Click="WybierzPlik_Click"/>
-                <TextBlock x:Name="ZalacznikTextBlock1" Text="Brak pliku" VerticalAlignment="Center"/>
+                <TextBlock x:Name="ZalacznikTextBlock" Text="Brak pliku" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
 
         <!-- Przyciski akcji -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,0,20,40">
             <Button Content="Anuluj" Click="Anuluj_Click"/>
-            <Button Content="Dodaj" Click="Dodaj_Click"/>
+            <Button Content="{Binding TekstPrzycisku}" Click="Dodaj_Click" />
         </StackPanel>
     </Grid>
 </Window>
