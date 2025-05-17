@@ -33,27 +33,11 @@
   },
   {
     "Opis": "test",
-    "Kwota": -30,
-    "Data": "2025-05-11T19:45:41.4842723+02:00",
-    "Kategoria": "Jedzenie",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
-    "Opis": "test",
     "Kwota": -50,
     "Data": "2025-05-11T20:24:25.2173589+02:00",
     "Kategoria": "Transport",
     "Uzytkownik": "admin",
     "ZalacznikSciezka": "C:\\Users\\kruzl\\Desktop\\1306182.jpeg"
-  },
-  {
-    "Opis": "test",
-    "Kwota": -75,
-    "Data": "2025-05-11T20:26:23.5629643+02:00",
-    "Kategoria": "Jedzenie",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
   },
   {
     "Opis": "t",
@@ -64,16 +48,8 @@
     "ZalacznikSciezka": null
   },
   {
-    "Opis": "t",
-    "Kwota": -5,
-    "Data": "2025-05-11T20:29:07.1313522+02:00",
-    "Kategoria": "Transport",
-    "Uzytkownik": "admin",
-    "ZalacznikSciezka": null
-  },
-  {
     "Opis": "test",
-    "Kwota": -1000,
+    "Kwota": -900,
     "Data": "2025-05-11T21:54:47.0957678+02:00",
     "Kategoria": "Jedzenie",
     "Uzytkownik": "admin",
@@ -81,9 +57,25 @@
   },
   {
     "Opis": "test",
-    "Kwota": -10,
-    "Data": "2025-05-11T22:49:18.2933045+02:00",
+    "Kwota": -100,
+    "Data": "2025-05-17T13:18:10.3658526+02:00",
     "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -150,
+    "Data": "2025-05-17T14:20:13.7408783+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -100,
+    "Data": "2025-06-17T14:20:27.5437109+02:00",
+    "Kategoria": "Rachunki",
     "Uzytkownik": "admin",
     "ZalacznikSciezka": null
   }

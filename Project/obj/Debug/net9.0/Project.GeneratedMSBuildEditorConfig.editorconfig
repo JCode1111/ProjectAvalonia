@@ -38,3 +38,6 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/RejestracjaWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/kruzl/Desktop/Avalonia/ProjectAvalonia/Project/Views/WykresyWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

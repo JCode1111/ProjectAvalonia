@@ -25,6 +25,9 @@ namespace Project.Views
         private List<Transakcja> _aktualneTransakcje = new();
         private string? WybraneSortowanie = null;
 
+        private WykresyWindow? _wykresyWindow;
+
+
 private DateTime _ostatnieKlikniecie = DateTime.MinValue;
 private TransakcjaWidok? _ostatnioKliknieta = null;
 
@@ -64,6 +67,20 @@ private TransakcjaWidok? _ostatnioKliknieta = null;
             UpdateUI();
         }
 
+private void OtworzWykresy_Click(object? sender, RoutedEventArgs e)
+{
+    if (_wykresyWindow == null || !_wykresyWindow.IsVisible)
+    {
+        _wykresyWindow = new WykresyWindow(UzytkownikZalogowany.Login);
+        _wykresyWindow.Closed += (s, args) => _wykresyWindow = null;
+        _wykresyWindow.Show();
+    }
+    else
+    {
+        _wykresyWindow.Activate();
+    }
+}
+
 
         //Aktualizacja UI
         private void UpdateUI()
@@ -73,6 +90,7 @@ private TransakcjaWidok? _ostatnioKliknieta = null;
             MenuLogowanie.IsVisible = !zalogowany;
             MenuRejestracja.IsVisible = !zalogowany;
             MenuWyloguj.IsVisible = zalogowany;
+            MenuWykresy.IsVisible = zalogowany;
             // Panels visibility
             PanelNieZalogowany.IsVisible = !zalogowany;
             PanelZalogowany.IsVisible = zalogowany;
@@ -97,41 +115,44 @@ private TransakcjaWidok? _ostatnioKliknieta = null;
         }
 
         //Dodawanie transakcji
-private async void DodajTransakcje_Click(object? sender, RoutedEventArgs e)
-{
-    if (UzytkownikZalogowany == null) return;
+        private async void DodajTransakcje_Click(object? sender, RoutedEventArgs e)
+        {
+            if (UzytkownikZalogowany == null) return;
 
-    var okno = new DodajTransakcjeWindow();
-    var result = await okno.ShowDialog<bool>(this);
+            var okno = new DodajTransakcjeWindow();
+            var result = await okno.ShowDialog<bool>(this);
 
-    if (!result) return;
+            if (!result) return;
 
-    var t = new Transakcja
-    {
-        Data = DateTime.Now,
-        Kwota = okno.Kwota,
-        Kategoria = okno.Kategoria,
-        Opis = okno.Opis,
-        Uzytkownik = UzytkownikZalogowany.Login,
-        ZalacznikSciezka = okno.ZalacznikSciezka
-    };
+            var t = new Transakcja
+            {
+                Data = DateTime.Now,
+                Kwota = okno.Kwota,
+                Kategoria = okno.Kategoria,
+                Opis = okno.Opis,
+                Uzytkownik = UzytkownikZalogowany.Login,
+                ZalacznikSciezka = okno.ZalacznikSciezka
+            };
 
-    // 1. Zapis transakcji
-    TransakcjaService.Zapisz(t);
+            // 1. Zapis transakcji
+            TransakcjaService.Zapisz(t);
 
-    // 2. Przelicz saldo i zapisz
-    UserService.PrzeliczISaveSaldo(UzytkownikZalogowany.Login);
+            // 2. Przelicz saldo i zapisz
+            UserService.PrzeliczISaveSaldo(UzytkownikZalogowany.Login);
 
-    // 3. Odśwież saldo w obiekcie użytkownika
-    UzytkownikZalogowany.Saldo = TransakcjaService
-        .WczytajDlaUzytkownika(UzytkownikZalogowany.Login)
-        .Sum(x => x.Kwota);
+            // 3. Odśwież saldo w obiekcie użytkownika
+            UzytkownikZalogowany.Saldo = TransakcjaService
+                .WczytajDlaUzytkownika(UzytkownikZalogowany.Login)
+                .Sum(x => x.Kwota);
 
-    // 4. Sprawdź wszystkie limity
-    SprawdzWszystkieLimityIWyświetl();
+            // 4. Sprawdź wszystkie limity
+            SprawdzWszystkieLimityIWyświetl();
 
-    // 5. Odśwież UI
-    WczytajTransakcjeIUstawSaldo();
+            // 5. Odśwież UI
+            WczytajTransakcjeIUstawSaldo();
+    
+            _wykresyWindow?.OdswiezWykresy(UzytkownikZalogowany.Login);
+
 }
 
 private void UsunTransakcje_Click(object? sender, RoutedEventArgs e)
@@ -165,6 +186,7 @@ private void UsunTransakcje_Click(object? sender, RoutedEventArgs e)
                 TransakcjaService.Zapisz(transakcja);
                 UserService.PrzeliczISaveSaldo(UzytkownikZalogowany.Login);
                 WczytajTransakcjeIUstawSaldo(); // odśwież dane
+                _wykresyWindow?.OdswiezWykresy(UzytkownikZalogowany.Login);
             }
         }
 

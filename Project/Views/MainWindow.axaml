@@ -15,6 +15,8 @@
         <MenuItem x:Name="MenuRejestracja" Header="Rejestracja" Click="Rejestracja_Click"/>
         <MenuItem x:Name="MenuWyloguj" Header="Wyloguj" Click="Wyloguj_Click" IsVisible="False"/>
       </MenuItem>
+
+      <MenuItem x:Name="MenuWykresy" Header="Wykresy" Click="OtworzWykresy_Click" IsVisible="False"/>
     </Menu>
 
     <!-- PANELE -->
@@ -55,7 +57,7 @@
         <!-- Przycisk: dodaj transakcję i wypłatę -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
           <Button Content="Dodaj transakcję" Click="DodajTransakcje_Click"/>
-          <Button Content="Dodaj Wypłatę" Click="DodajWyplate_Click"/>
+          <Button Content="Dodaj Wypłatę" Background="Green" Foreground="White" Click="DodajWyplate_Click"/>
         </StackPanel>
 
 

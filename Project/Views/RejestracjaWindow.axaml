@@ -3,6 +3,7 @@
         x:Class="Project.Views.RejestracjaWindow"
         Title="Rejestracja"
         Width="300" Height="300"
+        Background="#F4F6F8"
         WindowStartupLocation="CenterOwner"
         CanResize="False">
 
