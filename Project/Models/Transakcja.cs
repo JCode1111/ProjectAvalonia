@@ -12,6 +12,4 @@ public class Transakcja
     public string? ZalacznikSciezka { get; set; }
 }
 
-
-
 }

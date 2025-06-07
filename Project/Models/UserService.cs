@@ -9,6 +9,7 @@ namespace Project.Services
 {
     public static class UserService
     {
+        // sciezka do pliku json - users.json
         private static readonly string Sciezka = Path.Combine(
             Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
             "Data",
@@ -16,6 +17,7 @@ namespace Project.Services
         );
 
         // Metoda aktualizująca saldo w pliku users.json
+        // Znajduje uzytkownika na podstawie loginu i zapisuje zaktualizowane saldo
         public static void AktualizujSaldo(string login, decimal noweSaldo)
         {
             Console.WriteLine($"[UserService] Aktualizuję saldo dla '{login}' na {noweSaldo}");
@@ -36,7 +38,7 @@ namespace Project.Services
                 Console.WriteLine($"[UserService] Nie znaleziono użytkownika: {login}");
                 return;
             }
-
+            // aktualizacja salda
             user.Saldo = noweSaldo;
 
             var nowyJson = JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true });
@@ -44,7 +46,7 @@ namespace Project.Services
             Console.WriteLine("[UserService] Zaktualizowany users.json:\n" + nowyJson);
         }
 
-        // Metoda przeliczająca saldo na podstawie transakcji użytkownika
+        // Metoda przeliczająca saldo na podstawie sumy transakcji użytkownika
         public static void PrzeliczISaveSaldo(string login)
         {
             var transakcje = TransakcjaService.WczytajDlaUzytkownika(login);
@@ -52,6 +54,7 @@ namespace Project.Services
             AktualizujSaldo(login, noweSaldo);
         }
 
+        /// Wczytanie danych użytkownika na podstawie loginu.        
         public static Uzytkownik? Wczytaj(string login)
         {
             if (!File.Exists(Sciezka)) return null;
@@ -61,7 +64,8 @@ namespace Project.Services
             return lista?.FirstOrDefault(u => u.Login == login);
         }
 
-
+        // zapisanie uzytkownika do pliku users.json
+        // gdy uzytkownik juz istnieje napisuje jego dane
         public static void Zapisz(Uzytkownik user)
         {
             if (!File.Exists(Sciezka))
