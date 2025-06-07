@@ -9,17 +9,20 @@ using Project.Models;
 
 namespace Project.Views
 {
+    //Okno słuzace do dodawania nowej transakcji lub edytowania istniejącej
     public partial class DodajTransakcjeWindow : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+        // pola formularza
         public decimal Kwota { get; set; }
         public string Kategoria { get; set; } = "";
         public string Opis { get; set; } = "";
         public string? ZalacznikSciezka { get; set; }
 
+        // edycja transakcji        
         private Transakcja? EdytowanaTransakcja = null;
 
         private string _tytulOkna = "Dodaj transakcję";
@@ -43,51 +46,54 @@ namespace Project.Views
                 OnPropertyChanged(nameof(TekstPrzycisku));
             }
         }
-    public DodajTransakcjeWindow()
-{
-    InitializeComponent();
-    DataContext = this;
-    this.Loaded += Window_Loaded;
-}
-
-public DodajTransakcjeWindow(Transakcja? doEdycji = null)
-{
-    InitializeComponent();
-    DataContext = this;
-
-    if (doEdycji != null)
-    {
-        EdytowanaTransakcja = doEdycji;
-        TytulOkna = "Edytuj transakcję";
-        TekstPrzycisku = "Zapisz";
-
-        Kwota = Math.Abs(doEdycji.Kwota); // tylko do edycji — pokazuje dodatnio
-        Opis = doEdycji.Opis;
-        Kategoria = doEdycji.Kategoria;
-        ZalacznikSciezka = doEdycji.ZalacznikSciezka;
-    }
-    else
-    {
-        TytulOkna = "Dodaj transakcję";
-        TekstPrzycisku = "Dodaj";
-    }
-}
 
 
-public Transakcja ZwrocTransakcje(string login)
-{
-    return new Transakcja
-    {
-        Kwota = EdytowanaTransakcja?.Kwota < 0 ? -Math.Abs(Kwota) : Kwota,
-        Opis = Opis,
-        Kategoria = Kategoria,
-        ZalacznikSciezka = ZalacznikSciezka,
-        Data = EdytowanaTransakcja?.Data ?? DateTime.Now,
-        Uzytkownik = login
-    };
-}
+        public DodajTransakcjeWindow()
+        {
+            InitializeComponent();
+            DataContext = this;
+            this.Loaded += Window_Loaded;
+        }
 
+        // konstruktor dla edycji transakcji        
+        public DodajTransakcjeWindow(Transakcja? doEdycji = null)
+        {
+            InitializeComponent();
+            DataContext = this;
 
+            if (doEdycji != null)
+            {
+                EdytowanaTransakcja = doEdycji;
+                TytulOkna = "Edytuj transakcję";
+                TekstPrzycisku = "Zapisz";
+
+                Kwota = Math.Abs(doEdycji.Kwota); // pokazuje kwotę jako dodatnią
+                Opis = doEdycji.Opis;
+                Kategoria = doEdycji.Kategoria;
+                ZalacznikSciezka = doEdycji.ZalacznikSciezka;
+            }
+            else
+            {
+                TytulOkna = "Dodaj transakcję";
+                TekstPrzycisku = "Dodaj";
+            }
+        }
+
+        // zwracanie transakcji z wypelnionymi polami - edycja transakcji
+        public Transakcja ZwrocTransakcje(string login)
+        {
+            return new Transakcja
+            {
+                Kwota = EdytowanaTransakcja?.Kwota < 0 ? -Math.Abs(Kwota) : Kwota,
+                Opis = Opis,
+                Kategoria = Kategoria,
+                ZalacznikSciezka = ZalacznikSciezka,
+                Data = EdytowanaTransakcja?.Data ?? DateTime.Now,
+                Uzytkownik = login
+            };
+        }
+
+        // obsługa Wybierz plik
         private async void WybierzPlik_Click(object? sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog
@@ -103,38 +109,37 @@ public Transakcja ZwrocTransakcje(string login)
             }
         }
 
-private void Dodaj_Click(object? sender, RoutedEventArgs e)
-{
-    if (decimal.TryParse(KwotaTextBox.Text, out var kwota))
-    {
-        Kwota = EdytowanaTransakcja != null ? -Math.Abs(kwota) : -Math.Abs(kwota); // zawsze negatywna kwota
-        Kategoria = (KategoriaComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Inne";
-        Opis = OpisTextBox.Text;
+        // obsluga przycisku dodaj/zapisz transakcje 
+        private void Dodaj_Click(object? sender, RoutedEventArgs e)
+        {
+            if (decimal.TryParse(KwotaTextBox.Text, out var kwota))
+            {
+                Kwota = EdytowanaTransakcja != null ? -Math.Abs(kwota) : -Math.Abs(kwota); // zawsze negatywna kwota
+                Kategoria = (KategoriaComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Inne";
+                Opis = OpisTextBox.Text;
 
-        this.Close(true);
-    }
-    else
-    {
-        Console.WriteLine("Uzupełnij wszystkie pola!");
-        this.Close(false);
-    }
-}
+                this.Close(true);
+            }
+            else
+            {
+                Console.WriteLine("Uzupełnij wszystkie pola!");
+                this.Close(false);
+            }
+        }
 
-
+        // obsluga przycisku anuluj transakcje
         private void Anuluj_Click(object? sender, RoutedEventArgs e)
         {
-            this.Close(false); // cancelled
+            this.Close(false); 
         }
-    
-            private void Window_Loaded(object? sender, EventArgs e)
-    {
-        KwotaTextBox.Text = Kwota.ToString("N2");
-        OpisTextBox.Text = Opis;
-        KategoriaComboBox.SelectedItem = Kategoria;
-        // ewentualnie inne pola
-    }
 
+        
+        private void Window_Loaded(object? sender, EventArgs e)
+        {
+            KwotaTextBox.Text = Kwota.ToString("N2");
+            OpisTextBox.Text = Opis;
+            KategoriaComboBox.SelectedItem = Kategoria;
 
-
+        }
     }
 }
