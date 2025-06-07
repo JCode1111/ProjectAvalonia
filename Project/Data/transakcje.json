@@ -78,5 +78,85 @@
     "Kategoria": "Rachunki",
     "Uzytkownik": "admin",
     "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "moja wyplata",
+    "Kwota": 1500,
+    "Data": "2025-06-07T14:06:39.4588175+02:00",
+    "Kategoria": "Wyp\u0142ata",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "bilet",
+    "Kwota": -100,
+    "Data": "2025-06-07T14:07:25.7635621+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "bilet na samolot",
+    "Kwota": -500,
+    "Data": "2025-06-07T14:08:01.1517267+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -300,
+    "Data": "2025-06-07T14:08:13.8134055+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "admin",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "moja wyplata",
+    "Kwota": 2500,
+    "Data": "2025-06-07T14:09:34.7648944+02:00",
+    "Kategoria": "Wyp\u0142ata",
+    "Uzytkownik": "jakub",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "restauracja",
+    "Kwota": -400,
+    "Data": "2025-06-07T14:09:48.8481333+02:00",
+    "Kategoria": "Jedzenie",
+    "Uzytkownik": "jakub",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "burgery",
+    "Kwota": -500,
+    "Data": "2025-06-07T14:10:00.9425668+02:00",
+    "Kategoria": "Jedzenie",
+    "Uzytkownik": "jakub",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "test",
+    "Kwota": -150,
+    "Data": "2025-06-07T14:10:31.3033245+02:00",
+    "Kategoria": "Jedzenie",
+    "Uzytkownik": "jakub",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "bilet samolotowy",
+    "Kwota": -900,
+    "Data": "2025-06-07T14:10:48.7278101+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "jakub",
+    "ZalacznikSciezka": null
+  },
+  {
+    "Opis": "bus",
+    "Kwota": -150,
+    "Data": "2025-06-07T14:11:02.0753954+02:00",
+    "Kategoria": "Transport",
+    "Uzytkownik": "jakub",
+    "ZalacznikSciezka": null
   }
 ]
