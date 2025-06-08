@@ -28,8 +28,8 @@ namespace Project.Views
         private WykresyWindow? _wykresyWindow;
 
 
-private DateTime _ostatnieKlikniecie = DateTime.MinValue;
-private TransakcjaWidok? _ostatnioKliknieta = null;
+        private DateTime _ostatnieKlikniecie = DateTime.MinValue;
+        private TransakcjaWidok? _ostatnioKliknieta = null;
 
         public MainWindow()
         {
@@ -41,13 +41,13 @@ private TransakcjaWidok? _ostatnioKliknieta = null;
         private async void Logowanie_Click(object? sender, RoutedEventArgs e)
         {
             var dialog = new LogowanieWindow();
-            // Użyj generic ShowDialog<bool> aby odebrać wynik Close(true/false)
+
             var result = await dialog.ShowDialog<bool>(this);
 
             if (result && MainWindow.UzytkownikZalogowany != null)
             {
                 UpdateUI();
-                WczytajTransakcjeIUstawSaldo(); // <- dodaj to
+                WczytajTransakcjeIUstawSaldo(); 
             }
         }
 
@@ -67,31 +67,33 @@ private TransakcjaWidok? _ostatnioKliknieta = null;
             UpdateUI();
         }
 
-private void OtworzWykresy_Click(object? sender, RoutedEventArgs e)
-{
-    if (_wykresyWindow == null || !_wykresyWindow.IsVisible)
-    {
-        _wykresyWindow = new WykresyWindow(UzytkownikZalogowany.Login);
-        _wykresyWindow.Closed += (s, args) => _wykresyWindow = null;
-        _wykresyWindow.Show();
-    }
-    else
-    {
-        _wykresyWindow.Activate();
-    }
-}
+        //otwarcie wykresów uzytkownika
+        private void OtworzWykresy_Click(object? sender, RoutedEventArgs e)
+        {
+            if (_wykresyWindow == null || !_wykresyWindow.IsVisible)
+            {
+                _wykresyWindow = new WykresyWindow(UzytkownikZalogowany.Login);
+                _wykresyWindow.Closed += (s, args) => _wykresyWindow = null;
+                _wykresyWindow.Show();
+            }
+            else
+            {
+                _wykresyWindow.Activate();
+            }
+        }
 
 
         //Aktualizacja UI
         private void UpdateUI()
         {
             bool zalogowany = UzytkownikZalogowany != null;
-            // Menu items visibility
+
             MenuLogowanie.IsVisible = !zalogowany;
             MenuRejestracja.IsVisible = !zalogowany;
             MenuWyloguj.IsVisible = zalogowany;
             MenuWykresy.IsVisible = zalogowany;
-            // Panels visibility
+
+
             PanelNieZalogowany.IsVisible = !zalogowany;
             PanelZalogowany.IsVisible = zalogowany;
 
@@ -109,8 +111,7 @@ private void OtworzWykresy_Click(object? sender, RoutedEventArgs e)
             }
             else
             {
-                // Clear history when logged out
-                // HistoriaListBox.Items = new List<string>();
+
             }
         }
 
@@ -134,35 +135,36 @@ private void OtworzWykresy_Click(object? sender, RoutedEventArgs e)
                 ZalacznikSciezka = okno.ZalacznikSciezka
             };
 
-            // 1. Zapis transakcji
+            // Zapis transakcji
             TransakcjaService.Zapisz(t);
 
-            // 2. Przelicz saldo i zapisz
+            // Przeliczanie salda i zapis
             UserService.PrzeliczISaveSaldo(UzytkownikZalogowany.Login);
 
-            // 3. Odśwież saldo w obiekcie użytkownika
+            // Odświeżanie salda 
             UzytkownikZalogowany.Saldo = TransakcjaService
                 .WczytajDlaUzytkownika(UzytkownikZalogowany.Login)
                 .Sum(x => x.Kwota);
 
-            // 4. Sprawdź wszystkie limity
+            // Sprawdzanie wszystkiich limitów
             SprawdzWszystkieLimityIWyświetl();
 
-            // 5. Odśwież UI
+            //Odświeżanie UI
             WczytajTransakcjeIUstawSaldo();
     
             _wykresyWindow?.OdswiezWykresy(UzytkownikZalogowany.Login);
 
-}
+        }
 
-private void UsunTransakcje_Click(object? sender, RoutedEventArgs e)
-{
-    if (sender is Button btn && btn.DataContext is TransakcjaWidok widok)
-    {
-        TransakcjaService.Usun(widok.OryginalnaTransakcja);
-        WczytajTransakcjeIUstawSaldo();
-    }
-}
+        // obsługa usuwania transakcji
+        private void UsunTransakcje_Click(object? sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.DataContext is TransakcjaWidok widok)
+            {
+                TransakcjaService.Usun(widok.OryginalnaTransakcja);
+                WczytajTransakcjeIUstawSaldo();
+            }
+        }
 
 
 
@@ -177,7 +179,7 @@ private void UsunTransakcje_Click(object? sender, RoutedEventArgs e)
                 var transakcja = new Transakcja
                 {
                     Data = DateTime.Now,
-                    Kwota = wypłataWindow.Kwota, // wartość dodatnia
+                    Kwota = wypłataWindow.Kwota,
                     Kategoria = "Wypłata",
                     Opis = wypłataWindow.Opis,
                     Uzytkownik = UzytkownikZalogowany.Login
@@ -185,11 +187,12 @@ private void UsunTransakcje_Click(object? sender, RoutedEventArgs e)
 
                 TransakcjaService.Zapisz(transakcja);
                 UserService.PrzeliczISaveSaldo(UzytkownikZalogowany.Login);
-                WczytajTransakcjeIUstawSaldo(); // odśwież dane
+                WczytajTransakcjeIUstawSaldo();
                 _wykresyWindow?.OdswiezWykresy(UzytkownikZalogowany.Login);
             }
         }
 
+        //Filtry 
         private void Kategorie_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             WybranaKategoria = KategorieListBox.SelectedItem?.ToString();
@@ -224,155 +227,153 @@ private void UsunTransakcje_Click(object? sender, RoutedEventArgs e)
             WczytajTransakcjeIUstawSaldo();
         }
 
-
-private void WczytajTransakcjeIUstawSaldo()
-{
-    if (UzytkownikZalogowany == null) return;
-
-    var wszystkie = TransakcjaService.WczytajDlaUzytkownika(UzytkownikZalogowany.Login);
-
-    var saldo = wszystkie.Sum(t => t.Kwota);
-    SaldoText.Text = $"Saldo: {saldo:N2} PLN";
-
-    UzytkownikZalogowany.Saldo = saldo;
-    UserService.AktualizujSaldo(UzytkownikZalogowany.Login, saldo);
-
-    var filtrowane = wszystkie.AsEnumerable();
-
-    if (!string.IsNullOrEmpty(WybranaKategoria))
-        filtrowane = filtrowane.Where(t => t.Kategoria == WybranaKategoria);
-
-    if (DataOd != null)
-        filtrowane = filtrowane.Where(t => t.Data >= DataOd);
-
-    if (DataDo != null)
-        filtrowane = filtrowane.Where(t => t.Data <= DataDo);
-
-    if (!string.IsNullOrEmpty(WybraneSortowanie))
-    {
-        filtrowane = WybraneSortowanie switch
+        // zaczytanie transakcji uzytkownika
+        private void WczytajTransakcjeIUstawSaldo()
         {
-            "Data rosnąco" => filtrowane.OrderBy(t => t.Data),
-            "Data malejąco" => filtrowane.OrderByDescending(t => t.Data),
-            "Kwota rosnąco" => filtrowane.OrderBy(t => t.Kwota),
-            "Kwota malejąco" => filtrowane.OrderByDescending(t => t.Kwota),
-            _ => filtrowane
-        };
-    }
+            if (UzytkownikZalogowany == null) return;
 
-    _aktualneTransakcje = filtrowane.ToList();
+            var wszystkie = TransakcjaService.WczytajDlaUzytkownika(UzytkownikZalogowany.Login);
 
-    var listaWidokowa = _aktualneTransakcje
-        .Select((t, i) => new TransakcjaWidok
-        {
-            Index = i,
-            Wyswietlacz = $"{t.Data:yyyy-MM-dd HH:mm} | {t.Kategoria,-10} | {t.Opis,-20} | {t.Kwota,8:N2} PLN",
-            OryginalnaTransakcja = t
-        })
-        .ToList();
+            var saldo = wszystkie.Sum(t => t.Kwota);
+            SaldoText.Text = $"Saldo: {saldo:N2} PLN";
 
-    TransakcjeListBox.ItemsSource = listaWidokowa;
+            UzytkownikZalogowany.Saldo = saldo;
+            UserService.AktualizujSaldo(UzytkownikZalogowany.Login, saldo);
 
-    SprawdzWszystkieLimityIWyświetl();
-}
+            var filtrowane = wszystkie.AsEnumerable();
+
+            if (!string.IsNullOrEmpty(WybranaKategoria))
+                filtrowane = filtrowane.Where(t => t.Kategoria == WybranaKategoria);
+
+            if (DataOd != null)
+                filtrowane = filtrowane.Where(t => t.Data >= DataOd);
+
+            if (DataDo != null)
+                filtrowane = filtrowane.Where(t => t.Data <= DataDo);
+
+            if (!string.IsNullOrEmpty(WybraneSortowanie))
+            {
+                filtrowane = WybraneSortowanie switch
+                {
+                    "Data rosnąco" => filtrowane.OrderBy(t => t.Data),
+                    "Data malejąco" => filtrowane.OrderByDescending(t => t.Data),
+                    "Kwota rosnąco" => filtrowane.OrderBy(t => t.Kwota),
+                    "Kwota malejąco" => filtrowane.OrderByDescending(t => t.Kwota),
+                    _ => filtrowane
+                };
+            }
+
+            _aktualneTransakcje = filtrowane.ToList();
+
+            var listaWidokowa = _aktualneTransakcje
+                .Select((t, i) => new TransakcjaWidok
+                {
+                    Index = i,
+                    Wyswietlacz = $"{t.Data:yyyy-MM-dd HH:mm} | {t.Kategoria,-10} | {t.Opis,-20} | {t.Kwota,8:N2} PLN",
+                    OryginalnaTransakcja = t
+                })
+                .ToList();
+
+            TransakcjeListBox.ItemsSource = listaWidokowa;
+
+            SprawdzWszystkieLimityIWyświetl();
+        }
 
 
         // Limity budżetowe dla danej kategorii
         private void ZapiszLimit_Click(object? sender, RoutedEventArgs e)
-{
-    var kategoria = (KategoriaComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
-    if (!decimal.TryParse(LimitTextBox.Text, out var limit) || string.IsNullOrWhiteSpace(kategoria))
-    {
-        LimitInfoTextBlock.Text = " Wprowadź poprawny limit i wybierz kategorię.";
-        LimitInfoTextBlock.Foreground = Brushes.Red;
-        return;
-    }
-
-    var user = UserService.Wczytaj(UzytkownikZalogowany.Login);
-    if (user == null)
-    {
-        LimitInfoTextBlock.Text = " Błąd podczas wczytywania użytkownika.";
-        LimitInfoTextBlock.Foreground = Brushes.Red;
-        return;
-    }
-
-    var istniejący = user.LimityBudzetowe.FirstOrDefault(l => l.Kategoria == kategoria);
-    if (istniejący != null)
-        istniejący.Limit = limit;
-    else
-        user.LimityBudzetowe.Add(new LimitBudzetowy { Kategoria = kategoria, Limit = limit });
-
-    UserService.Zapisz(user);
-
-    LimitInfoTextBlock.Text = $" Limit zapisany dla kategorii {kategoria}.";
-    LimitInfoTextBlock.Foreground = Brushes.Green;
-
-    // Sprawdzenie wszystkich limitów
-    SprawdzWszystkieLimityIWyświetl();
-}
-
-
-        private void SprawdzWszystkieLimityIWyświetl()
-{
-    var user = UserService.Wczytaj(UzytkownikZalogowany.Login);
-    if (user == null) return;
-
-    var transakcjeUzytkownika = TransakcjaService.WczytajDlaUzytkownika(user.Login)
-        .Where(t => t.Data.Month == DateTime.Now.Month && t.Data.Year == DateTime.Now.Year)
-        .ToList();
-
-    var komunikaty = new List<string>();
-
-    foreach (var limit in user.LimityBudzetowe)
-    {
-        var transakcje = transakcjeUzytkownika.Where(t => t.Kategoria == limit.Kategoria);
-        var suma = transakcje.Sum(t => Math.Abs(t.Kwota));
-        var procent = suma / limit.Limit;
-
-        if (procent >= 1.0m)
-            komunikaty.Add($"❗ Przekroczono limit: '{limit.Kategoria}' ({suma} / {limit.Limit} zł)");
-        else if (procent >= 0.8m)
-            komunikaty.Add($"⚠ Zbliżasz się do limitu: '{limit.Kategoria}' ({suma} / {limit.Limit} zł)");
-    }
-
-    if (komunikaty.Any())
-    {
-        LimitInfoTextBlock.Text = string.Join("\n", komunikaty);
-        LimitInfoTextBlock.Foreground = Brushes.Orange;
-        LimitInfoTextBlock.TextAlignment = TextAlignment.Center;
-    }
-    else
-    {
-        LimitInfoTextBlock.Text = "";
-    }
-}
-
-
-    // Obsługa Zdarzenia - MouseDoubleClick
-private async void TransakcjaWidok_PointerPressed(object? sender, PointerPressedEventArgs e)
-{
-    if (sender is StackPanel panel && panel.DataContext is TransakcjaWidok widok)
-    {
-        var teraz = DateTime.Now;
-
-        if ((teraz - _ostatnieKlikniecie).TotalMilliseconds < 500 && _ostatnioKliknieta == widok)
         {
-            // Podwójne kliknięcie!
-            var okno = new DodajTransakcjeWindow(widok.OryginalnaTransakcja);
-            var rezultat = await okno.ShowDialog<bool>(this);
-
-            if (rezultat)
+            var kategoria = (KategoriaComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+            if (!decimal.TryParse(LimitTextBox.Text, out var limit) || string.IsNullOrWhiteSpace(kategoria))
             {
-                TransakcjaService.Zamien(widok.OryginalnaTransakcja,
-                    okno.ZwrocTransakcje(UzytkownikZalogowany.Login));
-                WczytajTransakcjeIUstawSaldo();
+                LimitInfoTextBlock.Text = " Wprowadź poprawny limit i wybierz kategorię.";
+                LimitInfoTextBlock.Foreground = Brushes.Red;
+                return;
+            }
+
+            var user = UserService.Wczytaj(UzytkownikZalogowany.Login);
+            if (user == null)
+            {
+                LimitInfoTextBlock.Text = " Błąd podczas wczytywania użytkownika.";
+                LimitInfoTextBlock.Foreground = Brushes.Red;
+                return;
+            }
+
+            var istniejący = user.LimityBudzetowe.FirstOrDefault(l => l.Kategoria == kategoria);
+            if (istniejący != null)
+                istniejący.Limit = limit;
+            else
+                user.LimityBudzetowe.Add(new LimitBudzetowy { Kategoria = kategoria, Limit = limit });
+
+            UserService.Zapisz(user);
+
+            LimitInfoTextBlock.Text = $" Limit zapisany dla kategorii {kategoria}.";
+            LimitInfoTextBlock.Foreground = Brushes.Green;
+
+            SprawdzWszystkieLimityIWyświetl();
+        }
+
+        //Sprawdzanie limitów uzytkownika
+        private void SprawdzWszystkieLimityIWyświetl()
+        {
+            var user = UserService.Wczytaj(UzytkownikZalogowany.Login);
+            if (user == null) return;
+
+            var transakcjeUzytkownika = TransakcjaService.WczytajDlaUzytkownika(user.Login)
+                .Where(t => t.Data.Month == DateTime.Now.Month && t.Data.Year == DateTime.Now.Year)
+                .ToList();
+
+            var komunikaty = new List<string>();
+
+            foreach (var limit in user.LimityBudzetowe)
+            {
+                var transakcje = transakcjeUzytkownika.Where(t => t.Kategoria == limit.Kategoria);
+                var suma = transakcje.Sum(t => Math.Abs(t.Kwota));
+                var procent = suma / limit.Limit;
+
+                if (procent >= 1.0m)
+                    komunikaty.Add($"UWAGA Przekroczono limit: '{limit.Kategoria}' ({suma} / {limit.Limit} zł)");
+                else if (procent >= 0.8m)
+                    komunikaty.Add($"UWAGA: Zbliżasz się do limitu: '{limit.Kategoria}' ({suma} / {limit.Limit} zł)");
+            }
+
+            if (komunikaty.Any())
+            {
+                LimitInfoTextBlock.Text = string.Join("\n", komunikaty);
+                LimitInfoTextBlock.Foreground = Brushes.Orange;
+                LimitInfoTextBlock.TextAlignment = TextAlignment.Center;
+            }
+            else
+            {
+                LimitInfoTextBlock.Text = "";
             }
         }
 
-        _ostatnieKlikniecie = teraz;
-        _ostatnioKliknieta = widok;
-    }
-}
+
+        // Obsługa Zdarzenia doubleclick - do zmiany transakcji
+        private async void TransakcjaWidok_PointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            if (sender is StackPanel panel && panel.DataContext is TransakcjaWidok widok)
+            {
+                var teraz = DateTime.Now;
+
+                if ((teraz - _ostatnieKlikniecie).TotalMilliseconds < 500 && _ostatnioKliknieta == widok)
+                {
+                    var okno = new DodajTransakcjeWindow(widok.OryginalnaTransakcja);
+                    var rezultat = await okno.ShowDialog<bool>(this);
+
+                    if (rezultat)
+                    {
+                        TransakcjaService.Zamien(widok.OryginalnaTransakcja,
+                            okno.ZwrocTransakcje(UzytkownikZalogowany.Login));
+                        WczytajTransakcjeIUstawSaldo();
+                    }
+                }
+
+                _ostatnieKlikniecie = teraz;
+                _ostatnioKliknieta = widok;
+            }
+        }
 
 
 

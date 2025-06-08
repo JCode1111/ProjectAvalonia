@@ -8,29 +8,31 @@ using System;
 
 namespace Project.Views
 {
+    /// Okno rejestracji nowego użytkownika.
     public partial class RejestracjaWindow : Window
     {
         public RejestracjaWindow()
         {
             InitializeComponent();
         }
-
+        /// Obsługa przycisku "Anuluj" — zamyka okno rejestracji.
         private void Anuluj_Click(object? sender, RoutedEventArgs e) => this.Close();
 
+        /// Obsługa przycisku "Zarejestruj".
         private void Zarejestruj_Click(object? sender, RoutedEventArgs e)
         {
 
             var nazwa = NazwaTextBox.Text?.Trim();
             var haslo = HasloTextBox.Text;
 
-            // Sprawdzanie, czy pola są puste
+            // pola muszą być uzupełnione
             if (string.IsNullOrWhiteSpace(nazwa) || string.IsNullOrWhiteSpace(haslo))
             {
                 BladTextBlock.Text = "Uzupełnij wszystkie pola.";
                 return;
             }
 
-              string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data", "users.json");
+            string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data", "users.json");
 
             List<Uzytkownik> users;
             if (File.Exists(path))
@@ -44,12 +46,12 @@ namespace Project.Views
                 catch (JsonException ex)
                 {
                     Console.WriteLine($"Błąd deserializacji: {ex.Message}");
-                    users = new List<Uzytkownik>(); // Tworzymy nową listę, jeśli wystąpił błąd
+                    users = new List<Uzytkownik>(); 
                 }
             }
             else
             {
-                // Jeżeli plik nie istnieje, tworzymy katalog "Data" (jeśli nie istnieje) oraz pusty plik
+                // Plik nie istnieje — tworzymy katalog i pustą listę użytkowników
                 Console.WriteLine("Plik nie istnieje, tworzymy nową listę.");
                 Directory.CreateDirectory("Data");
                 users = new List<Uzytkownik>(); // Nowa lista użytkowników, jeśli plik nie istnieje
@@ -66,12 +68,11 @@ namespace Project.Views
             users.Add(new Uzytkownik { Login = nazwa!, Haslo = haslo });
             Console.WriteLine("Nowy użytkownik dodany.");
 
-            // Zapisanie użytkowników do pliku
+             // Zapisanie zaktualizowanej listy użytkowników do pliku
             try
             {
                 var jsonString = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
-                
-                // Zapisz dane do pliku
+
                 File.WriteAllText(path, jsonString);
                 Console.WriteLine($"Dane zapisane do pliku: {path}");
             }
@@ -81,7 +82,6 @@ namespace Project.Views
                 return;
             }
 
-            // Przypisanie nazwy użytkownika do zmiennej statycznej
             MainWindow.UzytkownikZalogowany = new Uzytkownik { Login = nazwa!, Haslo = haslo };
             this.Close();
         }
